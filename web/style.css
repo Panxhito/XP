@@ -1,0 +1,60 @@
+:root {
+    --bg: rgba(18, 22, 30, 0.85);
+    --bg-inner: rgba(255, 255, 255, 0.08);
+    --text: #f2f5ff;
+    --accent: #00d4ff;
+    --accent2: #5f6fff;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+}
+
+.xp-hud {
+    position: absolute;
+    right: 2rem;
+    bottom: 2.5rem;
+    width: 320px;
+    padding: 0.75rem 0.9rem;
+    background: var(--bg);
+    border-radius: 12px;
+    color: var(--text);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    transition: opacity 0.2s ease;
+}
+
+.xp-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+}
+
+.xp-bar-wrap {
+    width: 100%;
+    height: 12px;
+    background: var(--bg-inner);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.xp-bar {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transition: width 0.3s ease;
+}
+
+.xp-progress {
+    margin-top: 0.4rem;
+    font-size: 0.82rem;
+    opacity: 0.9;
+    text-align: right;
+}
+
+.hidden {
+    opacity: 0;
+}
