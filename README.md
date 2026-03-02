@@ -1,10 +1,13 @@
-# qb-xp-system
+# qb-xp-system (Advanced)
 
-Sistema de XP para FiveM + QBCore con:
-- Niveles y guardado en base de datos
-- XP por trabajos
-- HUD visual NUI
-- Toggle HUD con `F10`
+Sistema de XP avanzado para FiveM + QBCore con:
+- Niveles + guardado persistente por `citizenid`
+- Prestigio automático al llegar al nivel máximo
+- XP por trabajos con multiplicadores por job
+- Anti-spam/cooldown por tipo de fuente XP
+- Multiplicador por permisos/roles (VIP/Mod/etc)
+- HUD visual NUI (toggle con `F10`)
+- Leaderboard y log de transacciones XP
 
 ## Instalación
 
@@ -19,30 +22,38 @@ ensure oxmysql
 ensure qb-xp-system
 ```
 
-## Uso básico
+## Integración desde otros scripts
 
-### Dar XP desde otro script (server)
+### Dar XP directa (server export)
 
 ```lua
-exports['qb-xp-system']:AddXP(source, 25, 'Misión completada')
+exports['qb-xp-system']:AddXP(source, 25, 'Misión completada', 'mission')
 ```
 
-### Dar XP por trabajo (server)
+### Dar XP por trabajo (server event)
 
 ```lua
-TriggerClientEvent('QBCore:Notify', source, 'Trabajo completado', 'success')
 TriggerEvent('qb-xp:server:addWorkXP', 10, 'Trabajo completado')
 ```
 
-> `10` es la base y se multiplica según `Config.JobXP[job]`.
+### Evento genérico de XP (server event)
 
-### Comando admin
+```lua
+TriggerEvent('qb-xp:server:addXP', 40, 'heist', 'Robo completado')
+```
 
-- `/givexp [id] [cantidad] [razón]`
+## Comandos
 
-## Configuración
+- `/givexp [id] [cantidad] [razón]` (admin)
+- `/xpleaderboard` (muestra top)
+- `/myxp` (estado personal)
+
+## Configuración recomendada
 
 Edita `config.lua` para:
 - Curva de niveles (`BaseXP`, `XPGrowth`, `MaxLevel`)
-- Multiplicadores de XP por trabajo
-- Tecla/comando del HUD
+- Prestigio (`PrestigeEnabled`, `PrestigeMax`)
+- Multiplicadores por trabajo (`JobXP`)
+- Cooldowns por tipo (`SourceCooldowns`)
+- Multiplicador por permisos (`PermissionMultipliers`)
+- Tecla/comando HUD
